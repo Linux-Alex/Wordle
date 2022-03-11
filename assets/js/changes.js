@@ -21,6 +21,5 @@ function Update() {
     $("#modal-update .modal-title").html("Posodobitev");
     $("#modal-update .modal-body").html("V preteklem času je prišlo do posodobitve besede dneva zaradi dela na strežniku. Iskano besedo smo zamenjali, prav tako pa smo Vam povrnili tudi vaše poskuse. <br> Za nevšečnosti se opravičujemo. <br> Hvala");
     $("#modal-update").modal("show");
-    //alert();
   }
 }
