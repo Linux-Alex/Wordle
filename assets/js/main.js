@@ -25,11 +25,11 @@ $(document).ready(function() {
   var keyboard = "";
   keyboardChars.forEach(function(item, index) {
     keyboard += "<div class='row" + index + "'>";
-    keyboard += (index == 2) ? "<button class='specialKey' data-specialKey='enter' onClick='PressedCheck()'><i class='fas fa-check'></i></button>" : "";
+    keyboard += (index == 2) ? "<button class='specialKey' data-specialKey='enter' onClick='PressedCheck(this)'><i class='fas fa-check'></i></button>" : "";
     for(i = 0; i < item.length; i++) {
       keyboard += "<button type='button' onClick='PressedKey(this)'>" + item[i].toUpperCase() + "</button>";
     }
-    keyboard += (index == 2) ? "<button class='specialKey' data-specialKey='backspace' onClick='PressedErase()'><i class='fas fa-backspace'></i></button>" : "";
+    keyboard += (index == 2) ? "<button class='specialKey' data-specialKey='backspace' onClick='PressedErase(this)'><i class='fas fa-backspace'></i></button>" : "";
     keyboard += "</div>";
   });
   $(".keyboard").html(keyboard);
@@ -84,6 +84,10 @@ $(document).ready(function() {
        keyboardChars[1].toUpperCase().includes(pressedKey) ||
        keyboardChars[2].toUpperCase().includes(pressedKey)) {
          $("button:contains('" + pressedKey + "')").click(PressedKey({textContent: pressedKey}));
+         $("button:contains('" + pressedKey + "')").addClass("simulate-pressed-key");
+         setTimeout(function () {
+            $("button:contains('" + pressedKey + "')").removeClass("simulate-pressed-key");
+        }, 200);
     }
     else if(pressedKey == "ENTER") {
       console.log("enter");
@@ -104,9 +108,13 @@ function SaveGame() {
 }
 
 function PressedKey(key) {
+  $(key).addClass("simulate-pressed-key");
+  setTimeout(function () {
+    $(key).removeClass("simulate-pressed-key");
+  }, 200);
   if(currentWord.length < 5 &&
-    game.tile.length < 30 &&
-    (game.history[game.history.length-1].status == "started" || game.history[game.history.length-1].status == "opend")) {
+        game.tile.length < 30 &&
+        (game.history[game.history.length-1].status == "started" || game.history[game.history.length-1].status == "opend")) {
     console.log(key.textContent);
     var rowIndex = Math.floor((game.tile.length / 5));
     console.log(".game .row" + rowIndex + " .col" + currentWord.length);
@@ -124,7 +132,11 @@ function FalseTry() {
   }, 500);
 }
 
-function PressedCheck() {
+function PressedCheck(key) {
+  $(key).addClass("simulate-pressed-key");
+  setTimeout(function () {
+    $(key).removeClass("simulate-pressed-key");
+  }, 200);
   if(currentWord.length < 5) {
     FalseTry();
   }
@@ -183,7 +195,11 @@ function PressedCheck() {
   $(':focus').blur();
 }
 
-function PressedErase() {
+function PressedErase(key) {
+  $(key).addClass("simulate-pressed-key");
+  setTimeout(function () {
+    $(key).removeClass("simulate-pressed-key");
+  }, 200);
   if(currentWord.length > 0) {
     var rowIndex = Math.floor((game.tile.length / 5));
     currentWord = currentWord.slice(0, -1);
