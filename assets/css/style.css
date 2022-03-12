@@ -80,7 +80,7 @@ body {
   box-shadow: 0 2px #aaa;
 }
 
-.keyboard > div > button:active,
+/*.keyboard > div > button:active,*/
 .simulate-pressed-key {
   box-shadow: none;
   transform: translateY(4px);
