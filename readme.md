@@ -3,6 +3,8 @@
 # Wordle
 > Preprosta miselna igra, kjer se vsak dan išče beseda dvena. Na dan dobite 6 poskusov, v katerih jo morate najti.
 
+## Demo igra
+Igro lahko poskusite na [!tej povezavi](http://aleks.rf.gd/wordle/).
 
 ## Kako se igra?
 - Vnesi 5 mestno slovensko besedo :pencil2:.

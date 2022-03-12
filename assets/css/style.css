@@ -1,5 +1,6 @@
 body {
   height: 100vh;
+  background-color: #eee;
 }
 
 .container {
@@ -8,8 +9,19 @@ body {
 
 .navbar-background {
   background: rgb(0,143,80);
-  background: linear-gradient(90deg, rgba(0,143,80,1) 0%, rgba(76,202,117,1) 94%);
+  /* background: linear-gradient(90deg, rgba(0,143,80,1) 0%, rgba(76,202,117,1) 94%); */
+  background: radial-gradient(circle, rgba(0, 143, 80, 1) 30%, rgba(0, 94, 53, 1) 80%);
   font-size: 150%;
+  position: relative;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.navbar-background:after {
+  position: absolute;
+  content: "";
+  height: 4px;
+  width: 100%;
+  background: linear-gradient(90deg, rgba(252, 240, 92, 1) 0%, rgba(191, 182, 67, 1));
 }
 
 .navbar-brand {
@@ -35,6 +47,7 @@ body {
 }
 
 .game > div > div {
+  background-color: #fff;
   margin: 2px;
   border: 2px solid gray;
   flex: 1 1 0px;
@@ -76,7 +89,8 @@ body {
   border-radius: 5px;
   padding: 10px 3px;
   text-align: center;
-  background-color: #efefef;
+  /* background-color: #efefef; */
+  background-color: #fff;
   box-shadow: 0 2px #aaa;
 }
 

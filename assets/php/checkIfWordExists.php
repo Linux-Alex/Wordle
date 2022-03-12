@@ -12,7 +12,7 @@ $status = "";
 $searchWord = $_POST['word'];
 
 function GenerateRadnomNumber() {
-  $hash = hash("sha512", date("Y-m-d") . "moj dodatni nakljucni faktor");
+  $hash = hash("sha512", date("Y-m-d") . "dodatek k naključnemu faktorju");
   $sumNumber = "";
   for($i = 0; $i < strlen($hash); $i++) {
     if(is_numeric($hash[$i]))
