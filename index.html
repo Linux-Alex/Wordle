@@ -23,7 +23,7 @@
     <meta name="theme-color" content="#ffffff">
     <!-- Phone Viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="assets/css/style.css?v=0.5">
+    <link rel="stylesheet" href="assets/css/style.css?v=0.6">
   </head>
   <body>
     <div class="navbar-background mb-2">
@@ -35,7 +35,9 @@
           <span class="flex-sm-fill text-sm-center nav-link disabled text-white"><a class="navbar-brand">
             <img src="assets/img/logo.png" style="max-height: 50px;" alt="Logo">
           </a></span>
-          <span class="flex-sm-fill text-sm-center nav-link disabled text-white"><i class="fas fa-cog"></i></span>
+          <span class="flex-sm-fill text-sm-center nav-link text-white" data-bs-toggle="modal" data-bs-target="#modal-settings" role="button">
+            <i class="fas fa-cog"></i>
+          </span>
         </nav>
       </div>
     </div>
@@ -129,8 +131,37 @@
         </div>
       </div>
     </div>
-    <script src="assets/js/main.js?v=0.7" charset="utf-8"></script>
-    <script src="assets/js/changes.js?v=0.4" charset="utf-8"></script>
+
+    <!-- Settings modal -->
+    <div class="modal fade modal-dialog-scrollable modal-fullscreen-lg-down" id="modal-settings" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modal-settingsLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal-settingsLabel">Orodja</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <h3>Kopiraj današnji rezultat</h3>
+            <button type="button" class="btn btn-secondary" id="copy-today-result-discord">
+              <i class="fa-solid fa-copy"></i>
+              Kopiraj za Discord
+            </button>
+            <br>
+            <button type="button" class="btn btn-secondary" id="copy-today-result-messenger">
+              <i class="fa-solid fa-copy"></i>
+              Kopiraj za Messenger
+            </button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zapri</button>
+            <!-- <button type="button" class="btn btn-success">Zapri</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/js/main.js?v=0.8" charset="utf-8"></script>
+    <script src="assets/js/changes.js?v=0.5" charset="utf-8"></script>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   </body>

@@ -2,7 +2,7 @@ $(document).ready(function() {
   game = JSON.parse(localStorage.getItem(storage_location));
   if(game != null) {
     console.log(game.history[game.history.length-1].date);
-    if(1644413540627 > new Date(game.history[game.history.length-1].date).valueOf()) {
+    if(1647595702111 > new Date(game.history[game.history.length-1].date).valueOf()) {
       Update();
       console.log("posodobitev");
     }

@@ -60,6 +60,42 @@ $(document).ready(function() {
     ColorButton(item.char, item.status);
   });
 
+  // copy result to clipboard for discord
+  $("#copy-today-result-discord").click(function() {
+    var copyString = "Today Wordle Slovenia 🇸🇮 Result:\n";
+    game.tile.forEach((item, i) => {
+      if(item.status == "0")
+        copyString += ":white_large_square:";
+      else if(item.status == "1")
+        copyString += ":yellow_square:";
+      else if(item.status == "2")
+        copyString += ":green_square:";
+      if((i+1) % 5 == 0)
+        copyString += "\n";
+    });
+    copyString += "\nPlay on http://aleks.rf.gd/wordle/";
+    CopyToClipboard(copyString);
+    console.log("Kopiranje izvedeno.");
+  });
+
+  // copy result to clipboard for messenger
+  $("#copy-today-result-messenger").click(function() {
+    var copyString = "Today Wordle Slovenia 🇸🇮 Result:\n";
+    game.tile.forEach((item, i) => {
+      if(item.status == "0")
+        copyString += "💣";
+      else if(item.status == "1")
+        copyString += "🤔";
+      else if(item.status == "2")
+        copyString += "💚";
+      if((i+1) % 5 == 0)
+        copyString += "\n";
+    });
+    copyString += "\nPlay on http://aleks.rf.gd/wordle/";
+    CopyToClipboard(copyString);
+    console.log("Kopiranje izvedeno.");
+  });
+
   // Current Word Initialisation
   currentWord = "";
 
@@ -83,18 +119,17 @@ $(document).ready(function() {
     if(keyboardChars[0].toUpperCase().includes(pressedKey) ||
        keyboardChars[1].toUpperCase().includes(pressedKey) ||
        keyboardChars[2].toUpperCase().includes(pressedKey)) {
+         SimulatePressedKey("button:contains('" + pressedKey + "')");
          $("button:contains('" + pressedKey + "')").click(PressedKey({textContent: pressedKey}));
-         $("button:contains('" + pressedKey + "')").addClass("simulate-pressed-key");
-         setTimeout(function () {
-            $("button:contains('" + pressedKey + "')").removeClass("simulate-pressed-key");
-        }, 200);
     }
     else if(pressedKey == "ENTER") {
       console.log("enter");
+      SimulatePressedKey("button[data-specialKey='enter']");
       $("button[data-specialKey='enter']").click(PressedCheck());
     }
     else if(pressedKey == "BACKSPACE") {
       console.log("backspace");
+      SimulatePressedKey("button[data-specialKey='backspace']");
       $("button[data-specialKey='backspace']").click(PressedErase());
     }
     else {
@@ -108,10 +143,7 @@ function SaveGame() {
 }
 
 function PressedKey(key) {
-  $(key).addClass("simulate-pressed-key");
-  setTimeout(function () {
-    $(key).removeClass("simulate-pressed-key");
-  }, 200);
+  SimulatePressedKey(key);
   if(currentWord.length < 5 &&
         game.tile.length < 30 &&
         (game.history[game.history.length-1].status == "started" || game.history[game.history.length-1].status == "opend")) {
@@ -133,10 +165,7 @@ function FalseTry() {
 }
 
 function PressedCheck(key) {
-  $(key).addClass("simulate-pressed-key");
-  setTimeout(function () {
-    $(key).removeClass("simulate-pressed-key");
-  }, 200);
+  SimulatePressedKey(key);
   if(currentWord.length < 5) {
     FalseTry();
   }
@@ -196,10 +225,7 @@ function PressedCheck(key) {
 }
 
 function PressedErase(key) {
-  $(key).addClass("simulate-pressed-key");
-  setTimeout(function () {
-    $(key).removeClass("simulate-pressed-key");
-  }, 200);
+  SimulatePressedKey(key);
   if(currentWord.length > 0) {
     var rowIndex = Math.floor((game.tile.length / 5));
     currentWord = currentWord.slice(0, -1);
@@ -263,4 +289,15 @@ function GameEnd(won) {
     $("#modal-gameEnd .modal-body").html("<img src='assets/img/sad.svg' style='max-height: 200px; margin: auto; width: 100%;'><br>Porabili ste vse možne poskuse in niste našli iskane besede dneva. <br><br> Več sreče prihodnjič.");
     $("#modal-gameEnd").modal("show");
   }
+}
+
+function SimulatePressedKey(selector) {
+  $(selector).addClass("simulate-pressed-key");
+  setTimeout(function () {
+    $(selector).removeClass("simulate-pressed-key");
+  }, 200);
+}
+
+function CopyToClipboard(text) {
+  navigator.clipboard.writeText(text);
 }
